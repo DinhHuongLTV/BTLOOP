@@ -12,6 +12,7 @@ public abstract class Entity {
     public boolean UP = false, DOWN = false, LEFT = false, RIGHT = false;
     public int speed = 8;
     public int count = 0;
+    public int score = 0;
     public Collision collision;
     // Tọa độ Y tính từ góc trái trên trong Canvas
     protected int y;

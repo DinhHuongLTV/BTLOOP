@@ -9,6 +9,7 @@ public class Brick extends Entity {
 
     public Brick(int xUnit, int yUnit, Image img) {
         super(xUnit, yUnit, img);
+        this.score = 5;
     }
 
     @Override

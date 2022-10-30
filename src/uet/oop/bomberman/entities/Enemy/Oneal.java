@@ -1,14 +1,16 @@
-package uet.oop.bomberman.entities;
+package uet.oop.bomberman.entities.Enemy;
 
 import java.util.ArrayList;
 
 import javafx.scene.image.Image;
 import uet.oop.bomberman.BombermanGame;
+import uet.oop.bomberman.entities.*;
 import uet.oop.bomberman.graphics.Sprite;
 
 public class Oneal extends Entity {
     ArrayList<Image> left = new ArrayList<>();
     ArrayList<Image> right = new ArrayList<>();
+    public boolean detect;
     // private boolean detect;
     Bomber bomber;
 
@@ -18,6 +20,7 @@ public class Oneal extends Entity {
         setRight();
         this.speed = 1;
         this.bomber = bomber;
+        this.score = 25;
     }
 
     public void setLeft() {
@@ -46,7 +49,7 @@ public class Oneal extends Entity {
             spriteCounter = 0;
         }
         collision = new Collision();
-        if ((collision.checkCollision(this) instanceof Explosion)) {
+        if ((collision.checkCollision(this, BombermanGame.getExplosion()) instanceof Explosion)) {
             this.check = true;
         }
         if (this.getY() < bomber.getY() && DOWN) {
@@ -88,6 +91,17 @@ public class Oneal extends Entity {
             this.LEFT = false;
         } else {
             this.LEFT = true;
+        }
+        if (Math.abs(this.getX() - bomber.getX()) <= Sprite.SCALED_SIZE * 3 &&
+                Math.abs(this.getY() - bomber.getY()) <= Sprite.SCALED_SIZE * 3) {
+            detect = true;
+        } else {
+            detect = false;
+        }
+        if (detect) {
+            speed = 1;
+        } else {
+            speed = 0;
         }
     }
 

@@ -1,8 +1,13 @@
-package uet.oop.bomberman.entities;
+package uet.oop.bomberman.entities.Enemy;
 
 import java.util.ArrayList;
 
 import javafx.scene.image.Image;
+import uet.oop.bomberman.BombermanGame;
+import uet.oop.bomberman.entities.Collision;
+import uet.oop.bomberman.entities.Entity;
+import uet.oop.bomberman.entities.Explosion;
+import uet.oop.bomberman.entities.Grass;
 import uet.oop.bomberman.graphics.Sprite;
 
 public class Balloom extends Entity {
@@ -23,6 +28,7 @@ public class Balloom extends Entity {
         setLeft();
         setRight();
         this.speed = 1;
+        this.score = 20;
     }
 
     ArrayList<Image> left = new ArrayList<>();
@@ -54,13 +60,13 @@ public class Balloom extends Entity {
             spriteCounter = 0;
         }
         collision = new Collision();
-        if (collision.checkCollision(this) instanceof Explosion) {
+        if (collision.checkCollision(this, BombermanGame.getExplosion()) instanceof Explosion) {
             check = true;
         }
         if (LEFT) {
             this.x -= this.speed;
             this.img = left.get(spriteNum);
-            if (!(collision.checkCollision(this) instanceof Grass)) {
+            if (!(collision.checkCollision(this, BombermanGame.getStillObjects()) instanceof Grass)) {
                 RIGHT = true;
                 LEFT = false;
             }
@@ -68,7 +74,7 @@ public class Balloom extends Entity {
         if (RIGHT) {
             this.x += this.speed;
             this.img = right.get(spriteNum);
-            if (!(collision.checkCollision(this) instanceof Grass)) {
+            if (!(collision.checkCollision(this, BombermanGame.getStillObjects()) instanceof Grass)) {
                 RIGHT = false;
                 LEFT = true;
             }
@@ -76,7 +82,7 @@ public class Balloom extends Entity {
         if (UP) {
             this.y -= this.speed;
             this.img = left.get(spriteNum);
-            if (!(collision.checkCollision(this) instanceof Grass)) {
+            if (!(collision.checkCollision(this, BombermanGame.getStillObjects()) instanceof Grass)) {
                 UP = false;
                 DOWN = true;
             }
@@ -85,7 +91,7 @@ public class Balloom extends Entity {
         if (DOWN) {
             this.y += this.speed;
             this.img = right.get(spriteNum);
-            if (!(collision.checkCollision(this) instanceof Grass)) {
+            if (!(collision.checkCollision(this, BombermanGame.getStillObjects()) instanceof Grass)) {
                 DOWN = false;
                 UP = true;
             }

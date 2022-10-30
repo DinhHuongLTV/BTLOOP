@@ -38,9 +38,9 @@ public class BombermanGame extends Application {
 
     private static List<Entity> bomblist = new ArrayList<>();
 
-    public static List<Entity> itemList = new ArrayList<>();
+    public static List<Entity> itemList =new ArrayList<>();
 
-    public static List<Entity> enemy = new ArrayList<>();
+    public static List<Entity> enemy =new ArrayList<>();
 
     public static List<Entity> getEnemy() {
         return enemy;
@@ -152,7 +152,7 @@ public class BombermanGame extends Application {
                 bomberman.bomberMove.add(move);
             }
             if (move.equals("S")) {
-                if (bomberman.BombItem) {
+                if(bomberman.BombItem) {
                     Bomb bomb = new Bomb(1, 1, Sprite.bomb.getFxImage());
                     bomb.setX(pos(bomberman.getX()));
                     bomb.setY(pos(bomberman.getY()));
@@ -166,8 +166,8 @@ public class BombermanGame extends Application {
                         bomblist.add(bomb);
                     }
                 }
-                if (!bomberman.BombItem) {
-                    if (bomblist.size() < 1) {
+                if(!bomberman.BombItem) {
+                    if(bomblist.size() < 1 ){
                         Bomb bomb = new Bomb(1, 1, Sprite.bomb.getFxImage());
                         bomb.setX(pos(bomberman.getX()));
                         bomb.setY(pos(bomberman.getY()));
@@ -191,9 +191,9 @@ public class BombermanGame extends Application {
         entities.clear();
         stillObjects.clear();
         bomberman = new Bomber(1, 1, Sprite.player_right.getFxImage());
-        BombItem bombItem = new BombItem(3, 1, Sprite.powerup_bombs.getFxImage());
-        FlameItem flameItem = new FlameItem(1, 4, Sprite.powerup_flames.getFxImage());
-        SpeedItem speedItem = new SpeedItem(2, 1, Sprite.powerup_speed.getFxImage());
+        BombItem bombItem=new BombItem(3,1,Sprite.powerup_bombs.getFxImage());
+        FlameItem flameItem=new FlameItem(1,4,Sprite.powerup_flames.getFxImage());
+        SpeedItem speedItem=new SpeedItem(2,1,Sprite.powerup_speed.getFxImage());
         try (FileInputStream fileInputStream = new FileInputStream(url)) {
             BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(fileInputStream));
             String line = bufferedReader.readLine();
@@ -248,13 +248,13 @@ public class BombermanGame extends Application {
     }
 
     public void update() {
-        // entities.forEach(Entity::update);
+//        entities.forEach(Entity::update);
         for (int i = 0; i < entities.size(); i++) {
             entities.get(i).update();
-            if (entities.get(i).check && entities.get(i) instanceof Bomber) {
+            if(entities.get(i).check && entities.get(i) instanceof Bomber){
                 System.out.println("Game Over");
             }
-            if (entities.get(i).check) {
+            if (entities.get(i).check ) {
                 entities.remove(i);
             }
         }
@@ -284,7 +284,7 @@ public class BombermanGame extends Application {
                     stillObjects.remove(i);
                 } else if (stillObjects.get(i) instanceof Portal) {
                     level++;
-                    if (level == 2 && enemy.size() == 0) {
+                    if (level == 2 && enemy.size()==0) {
                         createMap("./src/Level/level" + level + ".txt");
                     }
                 }
@@ -307,9 +307,9 @@ public class BombermanGame extends Application {
             }
         }
 
-        for (int i = 0; i < enemy.size(); i++) {
+        for(int i=0;i<enemy.size();i++){
             enemy.get(i).update();
-            if (enemy.get(i).check) {
+            if(enemy.get(i).check){
                 enemy.remove(i);
             }
         }
@@ -322,6 +322,10 @@ public class BombermanGame extends Application {
         explosion.forEach(g -> g.render(gc));
         bomblist.forEach(g -> g.render(gc));
         itemList.forEach(g -> g.render(gc));
+        for(int i=0;i<enemy.size();i++){
+            System.out.println(enemy.size());
+            enemy.get(i).render(gc);
+        }
     }
 
 }

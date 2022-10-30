@@ -11,7 +11,9 @@ import uet.oop.bomberman.entities.Grass;
 import uet.oop.bomberman.graphics.Sprite;
 
 public class Balloom extends Entity {
+    public boolean checkDie = false;
 
+    public int time = 50;
     public static final int HORIZONTAL = 0;
     public static final int VERTICAL = 1;
 
@@ -61,7 +63,7 @@ public class Balloom extends Entity {
         }
         collision = new Collision();
         if (collision.checkCollision(this, BombermanGame.getExplosion()) instanceof Explosion) {
-            check = true;
+            checkDie = true;
         }
         if (LEFT) {
             this.x -= this.speed;
@@ -97,5 +99,17 @@ public class Balloom extends Entity {
             }
         }
 
+        if (checkDie) {
+            if (time > 0) {
+                this.img = Sprite.balloom_dead.getFxImage();
+                time--;
+                LEFT = false;
+                RIGHT = false;
+                UP = false;
+                DOWN = false;
+            } else {
+                check = true;
+            }
+        }
     }
 }

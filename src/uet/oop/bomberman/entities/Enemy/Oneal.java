@@ -11,8 +11,11 @@ public class Oneal extends Entity {
     ArrayList<Image> left = new ArrayList<>();
     ArrayList<Image> right = new ArrayList<>();
     public boolean detect;
-    // private boolean detect;
     Bomber bomber;
+
+    public boolean checkDie;
+
+    public int time;
 
     public Oneal(int xUnit, int yUnit, Image img, Bomber bomber) {
         super(xUnit, yUnit, img);
@@ -50,7 +53,7 @@ public class Oneal extends Entity {
         }
         collision = new Collision();
         if ((collision.checkCollision(this, BombermanGame.getExplosion()) instanceof Explosion)) {
-            this.check = true;
+            this.checkDie = true;
         }
         if (this.getY() < bomber.getY() && DOWN) {
             this.setY(this.getY() + this.speed);
@@ -102,6 +105,18 @@ public class Oneal extends Entity {
             speed = 1;
         } else {
             speed = 0;
+        }
+        if (checkDie) {
+            if (time > 0) {
+                this.img = Sprite.oneal_dead.getFxImage();
+                time--;
+                LEFT = false;
+                RIGHT = false;
+                UP = false;
+                DOWN = false;
+            } else {
+                check = true;
+            }
         }
     }
 

@@ -51,71 +51,73 @@ public class Bomb extends Entity {
             if (BombermanGame.getEntity(left.getX(), left.getY()) instanceof Grass
                     || BombermanGame.getEntity(left.getX(), left.getY()) instanceof Brick) {
                 BombermanGame.getExplosion().add(left);
+                if (BombermanGame.getEntity(left.getX(), left.getY()) instanceof Brick) {
+                    ((Brick) Objects
+                            .requireNonNull(BombermanGame.getEntity(left.getX(), left.getY()))).destroyed = true;
+                }
             }
             if (BombermanGame.getEntity(right.getX(), right.getY()) instanceof Grass
                     || BombermanGame.getEntity(right.getX(), right.getY()) instanceof Brick) {
                 BombermanGame.getExplosion().add(right);
+                if (BombermanGame.getEntity(right.getX(), right.getY()) instanceof Brick) {
+                    ((Brick) Objects
+                            .requireNonNull(BombermanGame.getEntity(right.getX(), right.getY()))).destroyed = true;
+                }
             }
             if (BombermanGame.getEntity(top.getX(), top.getY()) instanceof Grass
                     || BombermanGame.getEntity(top.getX(), top.getY()) instanceof Brick) {
                 BombermanGame.getExplosion().add(top);
+                if (BombermanGame.getEntity(top.getX(), top.getY()) instanceof Brick) {
+                    ((Brick) Objects.requireNonNull(BombermanGame.getEntity(top.getX(), top.getY()))).destroyed = true;
+                }
             }
             if (BombermanGame.getEntity(down.getX(), down.getY()) instanceof Grass
                     || BombermanGame.getEntity(down.getX(), down.getY()) instanceof Brick) {
                 BombermanGame.getExplosion().add(down);
+                if (BombermanGame.getEntity(down.getX(), down.getY()) instanceof Brick) {
+                    ((Brick) Objects
+                            .requireNonNull(BombermanGame.getEntity(down.getX(), down.getY()))).destroyed = true;
+                }
             }
             if (BombermanGame.getEntity(left_last.getX(), left_last.getY()) instanceof Grass
                     || BombermanGame.getEntity(left_last.getX(), left_last.getY()) instanceof Brick) {
                 if (BombermanGame.getEntity(left.getX(), left.getY()) instanceof Grass) {
                     BombermanGame.getExplosion().add(left_last);
+                    if (BombermanGame.getEntity(left_last.getX(), left_last.getY()) instanceof Brick) {
+                        ((Brick) Objects.requireNonNull(
+                                BombermanGame.getEntity(left_last.getX(), left_last.getY()))).destroyed = true;
+                    }
                 }
             }
             if (BombermanGame.getEntity(right_last.getX(), right_last.getY()) instanceof Grass
                     || BombermanGame.getEntity(right_last.getX(), right_last.getY()) instanceof Brick) {
                 if (BombermanGame.getEntity(right.getX(), right.getY()) instanceof Grass) {
                     BombermanGame.getExplosion().add(right_last);
+                    if (BombermanGame.getEntity(right_last.getX(), right_last.getY()) instanceof Brick) {
+                        ((Brick) Objects.requireNonNull(
+                                BombermanGame.getEntity(right_last.getX(), right_last.getY()))).destroyed = true;
+                    }
                 }
             }
             if (BombermanGame.getEntity(top_last.getX(), top_last.getY()) instanceof Grass
                     || BombermanGame.getEntity(top_last.getX(), top_last.getY()) instanceof Brick) {
                 if (BombermanGame.getEntity(top.getX(), top.getY()) instanceof Grass) {
                     BombermanGame.getExplosion().add(top_last);
+                    if (BombermanGame.getEntity(top_last.getX(), top_last.getY()) instanceof Brick) {
+                        ((Brick) Objects.requireNonNull(
+                                BombermanGame.getEntity(top_last.getX(), top_last.getY()))).destroyed = true;
+                    }
                 }
             }
             if (BombermanGame.getEntity(down_last.getX(), down_last.getY()) instanceof Grass
                     || BombermanGame.getEntity(down_last.getX(), down_last.getY()) instanceof Brick) {
                 if (BombermanGame.getEntity(down.getX(), down.getY()) instanceof Grass) {
                     BombermanGame.getExplosion().add(down_last);
+                    if (BombermanGame.getEntity(down_last.getX(), down_last.getY()) instanceof Brick) {
+                        ((Brick) Objects.requireNonNull(
+                                BombermanGame.getEntity(down_last.getX(), down_last.getY()))).destroyed = true;
+                    }
                 }
-            }
-
-            if (BombermanGame.getEntity(left.getX(), left.getY()) instanceof Brick) {
-                ((Brick) Objects.requireNonNull(BombermanGame.getEntity(left.getX(), left.getY()))).destroyed = true;
-            }
-            if (BombermanGame.getEntity(right.getX(), right.getY()) instanceof Brick) {
-                ((Brick) Objects.requireNonNull(BombermanGame.getEntity(right.getX(), right.getY()))).destroyed = true;
-            }
-            if (BombermanGame.getEntity(top.getX(), top.getY()) instanceof Brick) {
-                ((Brick) Objects.requireNonNull(BombermanGame.getEntity(top.getX(), top.getY()))).destroyed = true;
-            }
-            if (BombermanGame.getEntity(down.getX(), down.getY()) instanceof Brick) {
-                ((Brick) Objects.requireNonNull(BombermanGame.getEntity(down.getX(), down.getY()))).destroyed = true;
-            }
-            if (BombermanGame.getEntity(left_last.getX(), left_last.getY()) instanceof Brick) {
-                ((Brick) Objects
-                        .requireNonNull(BombermanGame.getEntity(left_last.getX(), left_last.getY()))).destroyed = true;
-            }
-            if (BombermanGame.getEntity(right_last.getX(), right_last.getY()) instanceof Brick) {
-                ((Brick) Objects.requireNonNull(
-                        BombermanGame.getEntity(right_last.getX(), right_last.getY()))).destroyed = true;
-            }
-            if (BombermanGame.getEntity(top_last.getX(), top_last.getY()) instanceof Brick) {
-                ((Brick) Objects
-                        .requireNonNull(BombermanGame.getEntity(top_last.getX(), top_last.getY()))).destroyed = true;
-            }
-            if (BombermanGame.getEntity(down_last.getX(), down_last.getY()) instanceof Brick) {
-                ((Brick) Objects
-                        .requireNonNull(BombermanGame.getEntity(down_last.getX(), down_last.getY()))).destroyed = true;
             }
         } else {
             if (BombermanGame.getEntity(left.getX(), left.getY()) instanceof Grass

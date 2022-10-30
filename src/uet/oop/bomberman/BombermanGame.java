@@ -161,18 +161,6 @@ public class BombermanGame extends Application {
                 bomberman.bomberMove.add(move);
             }
             if (move.equals("S")) {
-                // Bomb bomb = new Bomb(1, 1, Sprite.bomb.getFxImage());
-                // bomb.setX(pos(bomberman.getX()));
-                // bomb.setY(pos(bomberman.getY()));
-                // if (Bomber.isflame) {
-                // bomb.flameItem = true;
-                // } else {
-                // bomb.flameItem = false;
-                // }
-                // if (!(getEntity(bomb.getX(), bomb.getY()) instanceof Wall)
-                // && !(getEntity(bomb.getX(), bomb.getY()) instanceof Brick)) {
-                // bomblist.add(bomb);
-                // }
                 if (bomberman.BombItem) {
                     Bomb bomb = new Bomb(1, 1, Sprite.bomb.getFxImage());
                     bomb.setX(pos(bomberman.getX()));
@@ -212,9 +200,6 @@ public class BombermanGame extends Application {
         entities.clear();
         stillObjects.clear();
         bomberman = new Bomber(1, 1, Sprite.player_right.getFxImage());
-        BombItem bombItem = new BombItem(3, 1, Sprite.powerup_bombs.getFxImage());
-        FlameItem flameItem = new FlameItem(1, 4, Sprite.powerup_flames.getFxImage());
-        SpeedItem speedItem = new SpeedItem(2, 1, Sprite.powerup_speed.getFxImage());
         try (FileInputStream fileInputStream = new FileInputStream(url)) {
             BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(fileInputStream));
             String line = bufferedReader.readLine();
@@ -232,6 +217,15 @@ public class BombermanGame extends Application {
                         case '2':
                             entities.add(new Oneal(i, rowCount, Sprite.oneal_left1.getFxImage(), bomberman));
                             break;
+                        case 's':
+                            itemList.add(new SpeedItem(i, rowCount, Sprite.powerup_speed.getFxImage()));
+                            break;
+                        case 'f':
+                            itemList.add(new FlameItem(i, rowCount, Sprite.powerup_flames.getFxImage()));
+                            break;
+                        case 'b':
+                            itemList.add(new BombItem(i, rowCount, Sprite.powerup_bombs.getFxImage()));
+                            break;
                     }
                 }
                 for (int i = 0; i < line.length(); i++) {
@@ -245,6 +239,21 @@ public class BombermanGame extends Application {
                         case 'x':
                             stillObjects.add(new Portal(i, rowCount, Sprite.portal.getFxImage()));
                             break;
+                        case 'b':
+                            Brick brick = new Brick(i, rowCount, Sprite.brick.getFxImage());
+                            brick.hasItem = true;
+                            stillObjects.add(brick);
+                            break;
+                        case 'f':
+                            Brick brick2 = new Brick(i, rowCount, Sprite.brick.getFxImage());
+                            brick2.hasItem = true;
+                            stillObjects.add(brick2);
+                            break;
+                        case 's':
+                            Brick brick3 = new Brick(i, rowCount, Sprite.brick.getFxImage());
+                            brick3.hasItem = true;
+                            stillObjects.add(brick3);
+                            break;
                         default:
                             stillObjects.add(new Grass(i, rowCount, Sprite.grass.getFxImage()));
                             break;
@@ -254,10 +263,6 @@ public class BombermanGame extends Application {
                 rowCount++;
             }
             entities.add(bomberman);
-            itemList.add(flameItem);
-            itemList.add(speedItem);
-            itemList.add(bombItem);
-
         } catch (
 
         IOException e) {
@@ -271,6 +276,7 @@ public class BombermanGame extends Application {
             entities.get(i).update();
             if (entities.get(i).check && entities.get(i) instanceof Bomber) {
                 System.out.println("Game Over");
+                endWindow.setScene(totalScore);
             }
             if (entities.get(i).check) {
                 entities.remove(i);
@@ -294,11 +300,16 @@ public class BombermanGame extends Application {
             stillObjects.get(i).update();
             if (stillObjects.get(i).check) {
                 if (stillObjects.get(i) instanceof Brick) {
-                    Entity entity = new Grass(1, 1, Sprite.grass.getFxImage());
-                    entity.setX(stillObjects.get(i).getX());
-                    entity.setY(stillObjects.get(i).getY());
-                    stillObjects.add(entity);
-                    stillObjects.remove(i);
+                    Brick temp = (Brick) stillObjects.get(i);
+                    if (!temp.hasItem) {
+                        Entity entity = new Grass(1, 1, Sprite.grass.getFxImage());
+                        entity.setX(stillObjects.get(i).getX());
+                        entity.setY(stillObjects.get(i).getY());
+                        stillObjects.add(entity);
+                        stillObjects.remove(i);
+                    } else {
+                        stillObjects.remove(i);
+                    }
                     totalScore += stillObjects.get(i).score;
                 } else if (stillObjects.get(i) instanceof Portal) {
                     level++;
@@ -328,15 +339,22 @@ public class BombermanGame extends Application {
                 itemList.remove(i);
             }
         }
+
+        for (int i = 0; i < enemy.size(); i++) {
+            enemy.get(i).update();
+            if (enemy.get(i).check) {
+                enemy.remove(i);
+            }
+        }
     }
 
     public void render() {
         gc.clearRect(0, 0, canvas.getWidth(), canvas.getHeight());
+        itemList.forEach(g -> g.render(gc));
         stillObjects.forEach(g -> g.render(gc));
         entities.forEach(g -> g.render(gc));
         explosion.forEach(g -> g.render(gc));
         bomblist.forEach(g -> g.render(gc));
-        itemList.forEach(g -> g.render(gc));
     }
 
 }

@@ -17,4 +17,13 @@ public class Collision {
         }
         return null;
     }
+    public Entity checkItem(Entity entity, List<Entity> list) {
+        // kiểm tra va chạm nổ
+        for (Entity e : list) {
+            if (e.getX() == entity.getX() && e.getY() == entity.getY()) {
+                return e;
+            }
+        }
+        return null;
+    }
 }

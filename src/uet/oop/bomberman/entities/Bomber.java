@@ -150,10 +150,10 @@ public class Bomber extends Entity {
             temp.check = true;
         }
 
-        if (collision.checkCollision(this, BombermanGame.getItemList()) instanceof SpeedItem) {
+        if (collision.checkItem(this, BombermanGame.getItemList()) instanceof SpeedItem) {
             speed += 1;
             speedUp = 1000;
-            collision.checkCollision(this, BombermanGame.getItemList()).check = true;
+            collision.checkItem(this, BombermanGame.getItemList()).check = true;
         }
         if (speedUp >= 0) {
             speedUp--;
@@ -161,10 +161,10 @@ public class Bomber extends Entity {
             speed = 1;
         }
 
-        if (collision.checkCollision(this, BombermanGame.getItemList()) instanceof FlameItem) {
+        if (collision.checkItem(this, BombermanGame.getItemList()) instanceof FlameItem) {
             flameItem = 1000;
             isflame = true;
-            collision.checkCollision(this, BombermanGame.getItemList()).check = true;
+            collision.checkItem(this, BombermanGame.getItemList()).check = true;
         }
         if (flameItem >= 0) {
             flameItem--;
@@ -201,11 +201,11 @@ public class Bomber extends Entity {
             }
         }
 
-        if (collision.checkCollision(this,
+        if (collision.checkItem(this,
                 BombermanGame.getItemList()) instanceof uet.oop.bomberman.entities.Item.BombItem) {
             timeBombItem = 1000;
             BombItem = true;
-            collision.checkCollision(this, BombermanGame.getItemList()).check = true;
+            collision.checkItem(this, BombermanGame.getItemList()).check = true;
         }
         if (timeBombItem >= 0) {
             timeBombItem--;

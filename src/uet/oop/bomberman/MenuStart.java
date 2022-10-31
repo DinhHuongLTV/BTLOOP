@@ -35,7 +35,7 @@ public class MenuStart {
         menu.add(buttonStart, 1, 0);
         menu.add(buttonExit, 1, 1);
         sceneMenu = new Scene(menu, Sprite.SCALED_SIZE * 31, Sprite.SCALED_SIZE * 13);
-        sceneMenu.getStylesheets().add(getClass().getResource("style.css").toExternalForm());
+//        sceneMenu.getStylesheets().add(getClass().getResource("style.css").toExternalForm());
         stage.setScene(sceneMenu);
     }
 }

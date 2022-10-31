@@ -337,6 +337,7 @@ public class BombermanGame extends Application {
                 entity.setY(itemList.get(i).getY());
                 stillObjects.add(entity);
                 itemList.remove(i);
+                totalScore += itemList.get(i).score;
             }
         }
 
@@ -344,6 +345,7 @@ public class BombermanGame extends Application {
             enemy.get(i).update();
             if (enemy.get(i).check) {
                 enemy.remove(i);
+                totalScore += enemy.get(i).score;
             }
         }
     }

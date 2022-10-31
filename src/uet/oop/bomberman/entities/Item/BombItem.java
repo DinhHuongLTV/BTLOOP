@@ -9,6 +9,7 @@ public class BombItem extends Entity {
 
     public BombItem(int xUnit, int yUnit, Image img) {
         super(xUnit, yUnit, img);
+        this.score = 15;
     }
 
     @Override

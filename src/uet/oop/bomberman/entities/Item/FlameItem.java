@@ -8,6 +8,7 @@ public class FlameItem extends Entity {
 
     public FlameItem(int xUnit, int yUnit, Image img) {
         super(xUnit, yUnit, img);
+        this.score = 15;
     }
 
     @Override

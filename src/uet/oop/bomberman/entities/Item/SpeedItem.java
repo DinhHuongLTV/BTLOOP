@@ -8,6 +8,7 @@ public class SpeedItem extends Entity {
 
     public SpeedItem(int xUnit, int yUnit, Image img) {
         super(xUnit, yUnit, img);
+        this.score = 15;
     }
 
     @Override

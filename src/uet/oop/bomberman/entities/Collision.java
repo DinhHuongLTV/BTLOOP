@@ -20,7 +20,8 @@ public class Collision {
     public Entity checkItem(Entity entity, List<Entity> list) {
         // kiểm tra va chạm nổ
         for (Entity e : list) {
-            if (e.getX() == entity.getX() && e.getY() == entity.getY()) {
+            if (e.getX() - 8 <= entity.getX() && e.getX() + 8 >= entity.getX() && e.getY() - 16 <= entity.getY()
+                    && e.getY() + 8 >= entity.getY()) {
                 return e;
             }
         }

@@ -6,7 +6,6 @@ import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.control.Button;
 import javafx.stage.Stage;
 import uet.oop.bomberman.entities.*;
 import uet.oop.bomberman.entities.Enemy.Balloom;
@@ -32,8 +31,11 @@ public class BombermanGame extends Application {
     public int totalScore = 0;
     private GraphicsContext gc;
     private Canvas canvas;
-    MenuStart menuStart;
-    End endWindow;
+    private MenuStart menuStart;
+    private End endWindow;
+    private Scene sceneGame;
+    public Bomber bomberman;
+
     private static List<Entity> entities = new ArrayList<>();
     private static List<Entity> stillObjects = new ArrayList<>();
 
@@ -41,9 +43,9 @@ public class BombermanGame extends Application {
 
     private static List<Entity> bomblist = new ArrayList<>();
 
-    public static List<Entity> itemList = new ArrayList<>();
+    private static List<Entity> itemList = new ArrayList<>();
 
-    public static List<Entity> enemy = new ArrayList<>();
+    private static List<Entity> enemy = new ArrayList<>();
 
     public static List<Entity> getEnemy() {
         return enemy;
@@ -64,8 +66,6 @@ public class BombermanGame extends Application {
     public static List<Entity> getBomblist() {
         return bomblist;
     }
-
-    public Bomber bomberman;
 
     public static void setBomblist(List<Entity> bomblist) {
         BombermanGame.bomblist = bomblist;
@@ -94,12 +94,6 @@ public class BombermanGame extends Application {
     public static void setEntities(List<Entity> entities) {
         BombermanGame.entities = entities;
     }
-
-    Button buttonStart;
-    Button buttonExit;
-
-    Scene sceneGame;
-    Scene sceneMenu;
 
     public static Entity getEntity(int x, int y) {
         for (Entity e : stillObjects) {
